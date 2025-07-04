@@ -1,47 +1,11 @@
 (function () {
   //
-  //  Interfaces, Types & Enums
-  //
-
-  type Listing = {
-    id: number;
-    overview: string;
-    poster_path: string;
-    title: string;
-    name: string;
-    vote_average: number;
-  };
-
-  enum ListType {
-    MOVIE = "movie",
-    TV = "tv",
-  }
-
-  //
   //  Globals
   //
 
   let trendingList: Listing[] = [];
   let popularList: Listing[] = [];
   let selectedType = ListType.MOVIE;
-  const API = "https://api.themoviedb.org/3";
-  const IMGAPI = "https://image.tmdb.org/t/p/w500";
-
-  const placeholderCard = `
-  <div class="col-7 col-md-4 col-xl-3 my-3">
-    <div class="p-2 bg-body bg-opacity-10 rounded position-relative h-100 placeholder-glow">
-      <div class="position-absolute top-0 start-0 m-3 bg-black bg-opacity-50 rounded p-2 text-warning">
-        <i class="fa-regular fa-star"></i>
-        <span class="placeholder">5.0</span>
-      </div>
-
-      <img src="https://placehold.co/220x330" class="w-100 rounded mb-2 placeholder">
-
-      <p class="p-1 m-0 placeholder w-75"></p>
-    </div>
-  </div>`;
-
-  let placehorderCardList = "";
 
   //
   //  Elements
@@ -54,6 +18,7 @@
   //
   //  Event Handlers
   //
+
   typeSelectBtnsContainer?.addEventListener("click", function (e: MouseEvent) {
     const target = e.target as HTMLElement;
     const movieButton = typeSelectBtnsContainer.children[0];
@@ -84,25 +49,8 @@
   //  Functions
   //
 
-  function CardElementFactory(title: string, imageURL: string, rating: string) {
-    return `
-    <div class="col-7 col-md-4 col-xl-3 my-3">
-      <div class="p-2 bg-body bg-opacity-10 rounded position-relative h-100">
-        <div class="position-absolute top-0 start-0 m-3 bg-black bg-opacity-50 rounded px-2 py-1 text-warning">
-          <i class="fa-regular fa-star"></i>
-          <span>${rating}</span>
-        </div>  
-      
-        <img 
-          src=${imageURL} alt=${title + " poster"} 
-          class="w-100 rounded mb-2">
-        
-        <p class="p-1 m-0">${title}</p>
-      </div>
-    </div>`;
-  }
-
-  async function LoadList(type: ListType, filter: string) {
+  async function LoadPageContent() {
+    let url = "";
     const options = {
       method: "GET",
       headers: {
@@ -112,76 +60,19 @@
       },
     };
 
-    let url = "";
+    url = `${API}/trending/${selectedType}/week?language=en-US`;
+    trendingList = (await LoadList(url, options))["list"];
 
-    switch (filter) {
-      case "trending":
-        url = `${API}/trending/${type}/week?language=en-US`;
-        break;
+    url = `${API}/${selectedType}/popular?language=en-US&page=1`;
+    popularList = (await LoadList(url, options))["list"];
 
-      case "popular":
-        url = `${API}/${type}/popular?language=en-US&page=1`;
-        break;
-    }
-
-    try {
-      const res = await fetch(url, options);
-
-      const { results } = await res.json();
-
-      switch (filter) {
-        case "trending":
-          trendingList = results;
-          break;
-
-        case "popular":
-          popularList = results;
-          break;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  function DisplayLists() {
-    trendingListContainer!.innerHTML = "";
-    popularListContainer!.innerHTML = "";
-
-    trendingList.forEach((trendingListItem) => {
-      trendingListContainer!.innerHTML += CardElementFactory(
-        selectedType === ListType.MOVIE
-          ? trendingListItem.title
-          : trendingListItem.name,
-        `${IMGAPI}${trendingListItem.poster_path}`,
-        trendingListItem.vote_average.toFixed(1)
-      );
-    });
-
-    popularList.forEach((popularListItem) => {
-      popularListContainer!.innerHTML += CardElementFactory(
-        selectedType === ListType.MOVIE
-          ? popularListItem.title
-          : popularListItem.name,
-        `${IMGAPI}${popularListItem.poster_path}`,
-        popularListItem.vote_average.toFixed(1)
-      );
-    });
-  }
-
-  async function LoadPageContent() {
-    await LoadList(selectedType, "trending");
-    await LoadList(selectedType, "popular");
-
-    DisplayLists();
+    DisplayList(trendingList, trendingListContainer!);
+    DisplayList(popularList, popularListContainer!);
   }
 
   //
   //  Script start
   //
-
-  for (let i = 0; i < 6; i++) {
-    placehorderCardList += placeholderCard;
-  }
 
   trendingListContainer!.innerHTML = placehorderCardList;
   popularListContainer!.innerHTML = placehorderCardList;
