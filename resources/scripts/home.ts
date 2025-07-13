@@ -5,7 +5,6 @@
 
   let trendingList: Listing[] = [];
   let popularList: Listing[] = [];
-  let selectedType = ListType.MOVIE;
 
   //
   //  Elements

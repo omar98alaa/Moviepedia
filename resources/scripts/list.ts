@@ -3,8 +3,6 @@
   //  Globals
   //
 
-  let list: Listing[] = [];
-  let selectedType = ListType.MOVIE;
   let currentPage = 1;
   let totalPages = 1;
 
@@ -51,7 +49,9 @@
     };
     let url = `${API}/discover/${selectedType}?language=en-US&page=${currentPage}&sort_by=popularity.desc`;
 
-    const { list, totalPages } = await LoadList(url, options);
+    const { list, total_pages } = await LoadList(url, options);
+
+    totalPages = total_pages;
 
     pageNumIndicator!.innerText = `${currentPage.toString()} of ${totalPages.toString()}`;
 

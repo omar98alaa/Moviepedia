@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moviepedia-Details</title>
+
+  <link rel="stylesheet" href="resources/styles/all.min.css">
+  <link rel="stylesheet" href="resources/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="resources/styles/style.css">
+</head>
+
+<body class="bg-dark bg-gradient text-light">
+  <!-- Navbar -->
+  <nav class="container-fluid py-3 sticky-top bg-dark">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="">
+        <h4>Movipedia</h4>
+      </div>
+
+      <div class="d-none d-md-flex align-items-center gap-2">
+        <a href="/index.html" class="btn text-light">Home</a>
+        <a href="/list.html?type=movie" class="btn text-light">Movies</a>
+        <a href="/list.html?type=tv" class="btn text-light">Tv Shows</a>
+
+        <a href="/login.html" class="btn btn-primary">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Banner -->
+    <div class="container-fluid p-0 overflow-hidden position-relative" style="max-height: 600px;">
+      <img id="banner" src="https://placehold.co/1920x600" alt="" class="img-fluid">
+      <div class="position-absolute top-0 start-0 z-1 w-100 h-100 bg-black bg-opacity-25"></div>
+    </div>
+
+    <!-- Title -->
+    <div class="container position-relative z-1 px-5" style="top: -4rem">
+      <div class="rounded-4 bg-black bg-opacity-50 p-4 col-md-6" style="backdrop-filter: blur(5px);">
+        <h2 id="title">Some Title</h2>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+      <div class="row px-5 mb-5">
+        <!-- Poster -->
+        <div class="col-md-6">
+          <div>
+            <img id="poster" src="https://placehold.co/500" alt="" class="img-fluid rounded-5">
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="col-md-6 my-4">
+          <div id="info-container" class="d-flex flex-column gap-4 px-4">
+            <!-- Tagline -->
+            <h3 id="tagline">Some tagline here</h3>
+
+            <!-- Overview -->
+            <p id="overview">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque pariatur commodi incidunt, quas
+              quibusdam deleniti maxime dicta. Porro incidunt expedita reiciendis aliquid. Doloribus quas perferendis ut
+              ipsum deserunt unde illum.
+            </p>
+
+            <div>
+              <h5>Rating</h5>
+              <div class="text-warning">
+                <i class="fa-regular fa-star"></i>
+                <span>5.0</span>
+              </div>
+            </div>
+
+            <div>
+              <h5>Type</h5>
+              <p>Movie</p>
+            </div>
+
+            <div>
+              <h5>Release Date</h5>
+              <p>01-01-2022</p>
+            </div>
+
+            <div>
+              <h5>Runtime</h5>
+              <p>180 min</p>
+            </div>
+
+            <div>
+              <h5>Genres</h5>
+              <p>Action</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- Scripts -->
+  <script src="resources/scripts/all.min.js"></script>
+  <script src="resources/scripts/bootstrap.bundle.min.js"></script>
+  <script src="dist/common.js"></script>
+  <script src="dist/details.js"></script>
+</body>
+
+</html>
