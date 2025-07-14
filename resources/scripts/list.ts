@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   //
   //  Globals
   //
@@ -39,12 +39,13 @@
   //
 
   async function LoadPageContent() {
+    await LoadAPIKey();
+
     const options = {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2ZmNGY3MTJjYTE1ZmI4ZDk4NmE0YWIxMTEyMjNmOCIsIm5iZiI6MTc1MTQ4ODkxMy4xMDMwMDAyLCJzdWIiOiI2ODY1OTk5MTk5ZWQ0NmZjYzA4ZTYzNzQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.slUGFh5HytfKT5sGJkK2XTkYXRkKv2wqBfAIqg_6wis",
+        Authorization: `Bearer ${APIKey}`,
       },
     };
     let url = `${API}/discover/${selectedType}?language=en-US&page=${currentPage}&sort_by=popularity.desc`;
@@ -76,6 +77,8 @@
   }
 
   listContainer!.innerHTML = placehorderCardList;
+
+  await LoadAPIKey();
 
   LoadPageContent();
 })();

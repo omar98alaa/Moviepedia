@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   //
   //  Globals
   //
@@ -137,16 +137,13 @@
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2ZmNGY3MTJjYTE1ZmI4ZDk4NmE0YWIxMTEyMjNmOCIsIm5iZiI6MTc1MTQ4ODkxMy4xMDMwMDAyLCJzdWIiOiI2ODY1OTk5MTk5ZWQ0NmZjYzA4ZTYzNzQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.slUGFh5HytfKT5sGJkK2XTkYXRkKv2wqBfAIqg_6wis",
+        Authorization: `Bearer ${APIKey}`,
       },
     };
 
     let url = `${API}/${selectedType}/${id}?language=en-US`;
 
     const listing = await LoadListingDetails(url, options);
-
-    console.log(listing);
 
     if (listing) {
       DisplayContent(listing);
@@ -182,6 +179,8 @@
     selectedType = ListType.MOVIE;
     document.querySelector("title")!.innerText = `Moviepedia-Movies`;
   }
+
+  await LoadAPIKey();
 
   LoadPageContent();
 })();

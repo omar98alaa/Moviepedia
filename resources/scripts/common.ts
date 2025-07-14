@@ -45,9 +45,9 @@ enum ListType {
 //
 //  Globals
 //
-
 const API = "https://api.themoviedb.org/3";
 const IMGAPI = "https://image.tmdb.org/t/p";
+let APIKey = "";
 
 let selectedType = ListType.MOVIE;
 
@@ -73,6 +73,14 @@ for (let i = 0; i < 4; i++) {
 //
 //  Functions
 //
+
+async function LoadAPIKey() {
+  if (APIKey === "") {
+    const res = await fetch("./config.json");
+    const { API_Key } = await res.json();
+    APIKey = API_Key;
+  }
+}
 
 function CardElementFactory(listing: Listing) {
   const title = listing.name || listing.title;
