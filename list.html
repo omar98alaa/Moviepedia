@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moviepedia-Home</title>
+  <title>Moviepedia</title>
 
   <link rel="stylesheet" href="resources/styles/all.min.css">
   <link rel="stylesheet" href="resources/styles/bootstrap.min.css">
@@ -31,47 +31,13 @@
 
   <!-- Header -->
   <header class="container my-5">
-    <h1 class="mb-3">Moviepedia</h1>
-    <p class="text-white-50">Explore the latest and most popular Movies and Tv Shows</p>
+    <h1 id="header-title" class="mb-3">Moviepedia</h1>
   </header>
 
   <main class="container">
-    <!-- type-select-btns -->
-    <div class="d-flex my-4">
-      <div id="type-select-btns" class="bg-body bg-opacity-10 rounded p-1">
-        <button type="button" class="btn text-light btn-primary">Movies</button>
-        <button type="button" class="btn text-light">Tv Shows</button>
-      </div>
-    </div>
-
-    <!-- Trending -->
-    <section id="trending-section" class="my-5">
-      <h3 class="my-3">Trending This Week</h3>
-
+    <section id="list-section" class="my-5">
       <!-- Card List -->
-      <div id="trending-list" class="row g-3 flex-nowrap overflow-auto">
-        <!-- Card -->
-        <!-- <div class="col-6 col-md-4 col-xl-2 my-3">
-          <div class="p-2 bg-body bg-opacity-10 rounded position-relative h-100 placeholder-glow">
-            <div class="position-absolute top-0 start-0 m-3 bg-black bg-opacity-50 rounded p-2 text-warning">
-              <i class="fa-regular fa-star"></i>
-              <span class="placeholder">5.0</span>
-            </div>
-
-            <img src="https://placehold.co/220x330" class="w-100 rounded mb-2 placeholder">
-
-            <p class="p-1 m-0 placeholder w-75"></p>
-          </div>
-        </div> -->
-      </div>
-    </section>
-
-    <!-- Popular -->
-    <section id="popular-section" class="my-5">
-      <h3 class="my-3">Popular</h3>
-
-      <!-- Card List -->
-      <div id="popular-list" class="row g-3 flex-nowrap overflow-auto">
+      <div id="list-container" class="row g-3">
         <!-- Card -->
         <!-- <div class="col-6 col-md-3 my-3">
           <div class="p-2 bg-body bg-opacity-10 rounded position-relative h-100 placeholder-glow">
@@ -87,6 +53,14 @@
         </div> -->
       </div>
     </section>
+
+    <section class="container d-flex justify-content-center my-5">
+      <div id="pageNum-container" class="bg-body bg-opacity-10 rounded-5 overflow-hidden p-2">
+        <button type="button" class="btn btn-primary rounded-5">Prev</button>
+        <span id="pageNum" class="mx-4">1 of 1</span>
+        <button type="button" class="btn btn-primary rounded-5">Next</button>
+      </div>
+    </section>
   </main>
 
 
@@ -94,7 +68,7 @@
   <script src="resources/scripts/all.min.js"></script>
   <script src="resources/scripts/bootstrap.bundle.min.js"></script>
   <script src="dist/common.js"></script>
-  <script src="dist/home.js"></script>
+  <script src="dist/list.js"></script>
 </body>
 
 </html>
